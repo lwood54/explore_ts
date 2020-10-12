@@ -1,14 +1,17 @@
 // interface is a TS key word
-interface Greetable {
+interface Named {
   readonly name: string;
-  // age: number;
+}
+
+interface Greetable extends Named{ // you can extend an interface to another interface
   greet(phrase: string): void;
 }
 
 // you can use an interface to create a 'contract' for what a class should contain or how it should be structured
 // you can implement multiple interfaces by using a ',' (unlike how you can only inherit one base class in another class)
 // this almost feels like a required todo list each time you create a class that will implement a given interface
-class Person implements Greetable {
+// class Person implements Greetable, Named { // you can either add extra interfaces like this OR
+class Person implements Greetable { // you can extend one interface from another, see above
   name: string;
   age: number = 38;
 
