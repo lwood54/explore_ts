@@ -121,3 +121,23 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 15});
+
+///// type casting /////
+// need to typecase because we can't change value on a generic 'HTMLElement'
+// 2 options for typcasting here.
+    // OPTION 1
+// const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
+
+  // OPTION 2
+// const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
+
+// OPTION 3 (if you want to use an if check instead of !, which guarantees there will not be null)
+const userInputElement = document.getElementById('user-input');
+if (userInputElement) {
+  // you need to typecast afer the check
+  (userInputElement as HTMLInputElement).value = 'Hi there!';
+}
+
+
+
+
