@@ -1,0 +1,7 @@
+{
+  "editor.fontFamily": "Space mono",
+  "editor.mouseWheelZoom": true,
+  "scm.inputFontFamily": "Space mono",
+  "debug.console.fontFamily": "Space mono",
+  "terminal.integrated.fontFamily": "Space mono"
+}
