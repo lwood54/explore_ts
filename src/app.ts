@@ -2,7 +2,7 @@ let userInput: unknown; // type unkown, different than type :any
 let userName: string;
 
 userInput = 5;
-userInput = "Logan";
+userInput = "Logan"; 
 
 // userName = userInput; // does not work because TS won't allow unknown to be defined as string
 
