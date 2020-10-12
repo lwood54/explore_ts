@@ -32,3 +32,18 @@ function addNumbers(a: Comb, b: Comb) {
 // one option would be to type cast
 const result = addNumbers('Logan', 'Wood'); 
 result.split(' '); // can't do this because return value is Comb instead of string
+
+
+
+///// OPTIONAL CHAINING /////
+const fetchedUserData = {
+  id: 'u1',
+  name: 'Logan',
+  job: { title: 'CEO', description: 'My own company'}
+};
+
+// normal way to check before runtime in JS
+// console.log(fetchedUserData.job && fetchedUserData.job.title);
+
+// TS has better option, optional chaining
+console.log(fetchedUserData?.job?.title);
