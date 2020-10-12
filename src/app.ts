@@ -19,4 +19,9 @@ function generateError(message: string, code: number): never {
   throw { message, errorCode: code}
 }
 
-generateError('An error occurred.', 500);
+// generateError('An error occurred.', 500);
+
+let button = document.querySelector('button');
+if (button) {
+  button.addEventListener('click', () => console.log('I have been clicked!'));
+}
