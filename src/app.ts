@@ -88,3 +88,36 @@ function useVehicle(vehicle: Vehicle) {
 
 useVehicle(v1);
 useVehicle(v2);
+
+// DISCRIMINATED unions  | one common property in which you can 'discriminate' between interfaces
+interface Bird {
+  type: 'bird'; // type of specific type 'bird' -> literal type
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: 'horse'; // using literal type to differentiate later
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  // one option we've learned earlier
+  // if ('flyingSpeed' in animal) {
+  //   console.log('Moving with speed: ' + animal.flyingSpeed);
+  // }
+  let speed: number;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+      
+      case 'horse':
+        speed = animal.runningSpeed;
+      break;
+  }
+  console.log('Moving at speed: ' + speed);
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 15});
