@@ -11,9 +11,13 @@ class Department {
   // }
 
   // abbreviated way of initializing and defining class properties
+  // can also use 'protected' that will allow classes that inherit this class to still have
+  // access to these class properties.
+  // If kept on private, only the base class will have access to this property
   private employees: string[] = []; // initialize w/ empty array
 
-  constructor(private id: string, public name: string) {
+  // private, public, readonly are all introduced by TS, not in JS
+  constructor(private readonly id: string, public name: string) {
 
   }
 
@@ -31,15 +35,33 @@ class Department {
   }
 }
 
+class ITDepartment extends Department {
+  admins: string[];
+
+  constructor(id: string, admins: string[]) {
+    // use super to pass along value to base class
+    super(id, 'IT'); // must call super() first before using this
+    this.admins = admins;
+  }
+}
+
 const accounting = new Department('d1', 'Accounting');
+const itDep = new ITDepartment('d2', ['Holly']);
 
 accounting.addEmployee('Logan');
 accounting.addEmployee('Tiffany');
 
+itDep.addEmployee('Amrynn');
+itDep.addEmployee('Eisley');
+
 console.log('accounting: ', accounting);
+console.log('IT Dept: ', itDep);
 
 accounting.describe();
 accounting.printEmployeeInfo();
+
+itDep.describe();
+itDep.printEmployeeInfo();
 
 // const accountingCopy = { name: 'Logan', describe: accounting.describe};
 // accountingCopy.describe();
