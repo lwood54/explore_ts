@@ -13,3 +13,10 @@ userInput = "Logan";
 if (typeof userInput === 'string') {
   userName = userInput; // DOES work because TS knows you are checking type first
 }
+
+// type: never
+function generateError(message: string, code: number): never {
+  throw { message, errorCode: code}
+}
+
+generateError('An error occurred.', 500);
