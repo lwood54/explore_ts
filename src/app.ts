@@ -1,27 +1,45 @@
-let userInput: unknown; // type unkown, different than type :any
-let userName: string;
+class Department {
+  // long way of initializing and defining class properties
+  // private id: string;
+  // private name: string;
+  // // private is a TS modifier option that prevents the access of this property in the class 'public' is the default
+  // private employees: string[] = []; // initialize w/ empty array
 
-userInput = 5;
-userInput = "Logan"; 
+  // constructor(id: string, n: string) {
+  //   this.id = id;
+  //   this.name = n;
+  // }
 
-// userName = userInput; // does not work because TS won't allow unknown to be defined as string
+  // abbreviated way of initializing and defining class properties
+  private employees: string[] = []; // initialize w/ empty array
 
-// the following is still better than :any because it allows TS to still help check for
-// types, you may have a situation where you really don't know what type is coming in, but
-// you can then check for different types conditionally, whereas :any just basically doesn't
-// let TS do any helpful checking
-if (typeof userInput === 'string') {
-  userName = userInput; // DOES work because TS knows you are checking type first
+  constructor(private id: string, public name: string) {
+
+  }
+
+  describe(this: Department) { // adding this: Department is a TS feature that adds check to make sure method call will look for a property
+    console.log(`Department (${this.id}): ${this.name}`);
+  }
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  printEmployeeInfo() {
+    console.log(this.employees.length);
+    console.log(this.employees);
+  }
 }
 
-// type: never
-function generateError(message: string, code: number): never {
-  throw { message, errorCode: code}
-}
+const accounting = new Department('d1', 'Accounting');
 
-// generateError('An error occurred.', 500);
+accounting.addEmployee('Logan');
+accounting.addEmployee('Tiffany');
 
-let button = document.querySelector('button');
-if (button) {
-  button.addEventListener('click', () => console.log('I have been clicked!'));
-}
+console.log('accounting: ', accounting);
+
+accounting.describe();
+accounting.printEmployeeInfo();
+
+// const accountingCopy = { name: 'Logan', describe: accounting.describe};
+// accountingCopy.describe();
