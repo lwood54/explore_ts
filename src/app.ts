@@ -139,5 +139,22 @@ if (userInputElement) {
 }
 
 
+//////// index types //////////
 
+// creating a flexible container, making it more generic
+interface ErrorContainer { // { email: 'Not a valid email', username: 'Must start with a character'}
+  id: string; // if you do set property, it must be of the same type as the index type, this is a restriction of index types
+  [prop: string]: string; // unkown prop name, but it will be a string and will have a value of a string
+
+  // could have
+  //id: number;
+  // [key: number]: string; // this should work, so you might expect something like 1: 'first' when in use
+}
+
+const errorBag: ErrorContainer = {
+  id: 'abc123',
+  email: 'Not a valid email',
+  // email: 5 // will not work because TS checks that this must be a string
+  username: 'Must start with a capital character.'
+};
 
