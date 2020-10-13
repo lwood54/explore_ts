@@ -47,3 +47,10 @@ const fetchedUserData = {
 
 // TS has better option, optional chaining
 console.log(fetchedUserData?.job?.title);
+
+
+//// nullish coalescing ////
+const usrInput = null;
+
+// const storedData = usrInput || 'DEFAULT';
+const storedData = usrInput ?? 'DEFAULT'; // null or undefined
