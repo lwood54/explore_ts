@@ -92,3 +92,27 @@ const numberStorage = new DataStorage<number>();
 // objStorage.addItem({name: 'Tiffany'});
 // objStorage.removeItem({name: 'Tiffany'});
 // console.log(objStorage.getItems());
+
+// partial types
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {}; // basically setting the types to optional
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal; // had to typecast here away from Partial to CourseGoal because we now know that courseGoal will fulfill requirements
+};
+
+//// readonly types
+const names: Readonly<string[]> = ['Logan', 'Tiffany'];
+// names.push('Amrynn'); // now with Readonly, you can't add to the array
+// names.push('Eisley');
