@@ -50,4 +50,9 @@ console.log(countAndDescribe(['programming', 'woodworking']));
 console.log(countAndDescribe([]));
 // console.log(countAndDescribe(54)); // won't work because number has no length
 
+// more constraints
+function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
+  return 'Value: ' + obj[key];
+}
 
+extractAndConvert({name: 'Logan'}, 'name');
