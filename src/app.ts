@@ -56,3 +56,39 @@ function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) 
 }
 
 extractAndConvert({name: 'Logan'}, 'name');
+
+// generic classes
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+// textStorage.addItem(10); // won't work because string was identified as type
+textStorage.addItem('input scores');
+textStorage.addItem('eat lunch');
+console.log('before remove: ', textStorage.getItems());
+textStorage.removeItem('eat lunch');
+console.log('after remove: ', textStorage.getItems());
+
+const numberStorage = new DataStorage<number>();
+
+// const objStorage = new DataStorage<object>();
+// objStorage.addItem({name: 'Logan'});
+// objStorage.addItem({name: 'Tiffany'});
+// objStorage.removeItem({name: 'Tiffany'});
+// console.log(objStorage.getItems());
