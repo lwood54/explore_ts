@@ -1,56 +1,53 @@
-type Comb = string | number;
-type Numr = number | boolean;
+/// EXample of Generics ///
+// const names: Array<string> = []; // same as string[]
 
-type Univ = Comb & Numr;
+// const promise: Promise<number> = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve(54);
+//   }, 2000);
+// });
 
-// originally written: //
-// function addNumbers(a: Comb, b: Comb) {
-//   if (typeof a === 'string' || typeof b === 'string') {
-//     return a.toString() + b.toString();
-//   }
-//   return a + b;
-// }
 
-/// using Function Overload ///
-function addNumbers(a: string, b: string): string;
-function addNumbers(a: number, b: number): number;
-function addNumbers(a: string, b: number): string;
-function addNumbers(a: number, b: string): string;
-function addNumbers(a: Comb, b: Comb) {
-  if (typeof a === 'string' || typeof b === 'string') {
-    return a.toString() + b.toString();
-  }
-  return a + b;
+/// build our own generics ///
+// on first use, it looks like we are using variables to represent a connection to
+// the type that will be passed as an argument to this function.
+// this works, however now T & U could be any time, so we need to use 'constraints' to correct this
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
 }
 
-// as is, has return value of Comb, meaning it can be a string or number
-// this prevents use of things like .split() on the result if it's concatinated string
-// const result = addNumbers(1, 5); 
-// const result = addNumbers('Logan', 'Wood'); 
-// result.split(' '); // can't do this because return value is Comb instead of string
-
-// one option would be to type cast
-const result = addNumbers('Logan', 'Wood'); 
-result.split(' '); // can't do this because return value is Comb instead of string
-
-
-
-///// OPTIONAL CHAINING /////
-const fetchedUserData = {
-  id: 'u1',
-  name: 'Logan',
-  job: { title: 'CEO', description: 'My own company'}
-};
-
-// normal way to check before runtime in JS
-// console.log(fetchedUserData.job && fetchedUserData.job.title);
-
-// TS has better option, optional chaining
-console.log(fetchedUserData?.job?.title);
+// in using extends object, we are adding constraints and informing TS that
+// the generic variables will at least be an object, but will be structured
+// differently from each other
+function mergeObjects<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+//// NOTE: you have a lot of flexibility with constraints, you can use any type,
+//// including a custom type, or even union types.
+//// You can also only constrain one generic, and nother the other if desired
 
 
-//// nullish coalescing ////
-const usrInput = null;
+const mergedObjs = merge({name: 'Logan'}, {age: 38});
+console.log(mergedObjs);
 
-// const storedData = usrInput || 'DEFAULT';
-const storedData = usrInput ?? 'DEFAULT'; // null or undefined
+
+// another generic
+interface Lengthy {
+  length: number;
+}
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+  let descriptionText = 'Have no value.';
+  if (element.length === 1) {
+    descriptionText = 'Have 1 element.';
+  } else if (element.length > 1) {
+    descriptionText = `Have ${element.length} elements`;
+  }
+  return [element, descriptionText];
+}
+
+console.log(countAndDescribe('Hi there!'));
+console.log(countAndDescribe(['programming', 'woodworking']));
+console.log(countAndDescribe([]));
+// console.log(countAndDescribe(54)); // won't work because number has no length
+
+
