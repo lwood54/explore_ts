@@ -1,7 +1,8 @@
 {
-  "editor.fontFamily": "Space mono",
+  "editor.fontFamily": "Fira Code",
   "editor.mouseWheelZoom": true,
-  "scm.inputFontFamily": "Space mono",
+  "scm.inputFontFamily": "Fira Code",
   "debug.console.fontFamily": "Space mono",
-  "terminal.integrated.fontFamily": "Space mono"
+  "terminal.integrated.fontFamily": "Fira Code",
+  "editor.fontSize": 14
 }
